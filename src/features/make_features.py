@@ -30,10 +30,7 @@ def tokenize_and_stem(text):
 
 
 def preprocess_part2(df):
-    """
-    Preprocess the text for the "is_name" task by extracting relevant features.
-    Use the provided tokens from the "tokens" column.
-    """
+    
     features_list = []
     labels_list = []
     tokens_list = []
@@ -48,11 +45,9 @@ def preprocess_part2(df):
             previous_word = tokens[i - 1] if i > 0 else None
             next_word = tokens[i + 1] if i < len(tokens) - 1 else None
 
-            # Extract features for the token
             features = {
                 "is_capitalized": token[0].isupper() if token else False,
                 "length": len(token),
-                "position": i,
                 "is_previous_capitalized": previous_word[0].isupper() if previous_word and previous_word != "" else False,
                 "is_next_capitalized": next_word[0].isupper() if next_word and next_word != "" else False,
             }
@@ -64,9 +59,6 @@ def preprocess_part2(df):
     return features_list, labels_list, tokens_list
 
 def make_features(df, task, train_mode=True, vectorizer_path=None):
-    #Partie 1
-
-      # If it's not training mode, we don't have the target column
 
     if task == "is_comic_video" :
         if train_mode:
